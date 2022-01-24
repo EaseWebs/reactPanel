@@ -1,36 +1,41 @@
-import React, { Component } from 'react'
+import React, { useState, useEffect } from 'react'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
 import Slider from 'react-slick'
 import './ShopOffers.css'
-export class Collections extends Component {
-  render() {
-    var images = [
-      { img: 'assets/w6.jpeg' },
-      { img: 'assets/w7.webp' },
-      { img: 'assets/w8.webp' },
-      { img: 'assets/h7.webp' },
-    ]
-    var imgSlides = () =>
-      images.map((num) => (
+import axios from 'axios'
+const Collections = () => {
+  const [SliderImages, setSlide] = useState([])
+  useEffect(() => {
+    const fetchSlider = async () => {
+      const { data } = await axios.get(
+        'http://13.59.57.74:5000/api/collection/'
+      )
+
+      setSlide(data)
+    }
+    fetchSlider()
+  }, [])
+
+  return (
+    <Slider
+      dots={false}
+      slidesToShow={1}
+      slidesToScroll={2}
+      autoplay={true}
+      arrows={false}
+      autoplaySpeed={3000}
+    >
+      {SliderImages.map((num) => (
         <div className='imgpad'>
-          <img className='imgdetails img-fluid' src={num.img} width='10%' />
+          <img
+            className='imgdetails'
+            src={num.images[0]}
+            collectionID={num.id}
+          />
         </div>
-      ))
-    return (
-      <div className='App'>
-        <Slider
-          dots={false}
-          slidesToShow={3}
-          slidesToScroll={2}
-          autoplay={true}
-          arrows={false}
-          autoplaySpeed={3000}
-        >
-          {imgSlides()}
-        </Slider>
-      </div>
-    )
-  }
+      ))}
+    </Slider>
+  )
 }
 export default Collections

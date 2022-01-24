@@ -1,9 +1,9 @@
 .wdt {
-  width: 90% !important;
+  width: 40% !important;
 }
 .img {
   height: 300px !important;
-  width: 1134px;
+  width: 100% !important;
 }
 
 .imgdetails {
@@ -14,8 +14,8 @@
 .imgpad {
   padding-bottom: 0px !important;
   padding-top: 0px !important;
-  padding-left: 50px !important;
-  padding-right: 50px !important;
+  padding-left: 20px !important;
+  padding-right: 20px !important;
 }
 .cls {
   padding-right: 300px !important;
